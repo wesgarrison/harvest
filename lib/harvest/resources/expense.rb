@@ -15,8 +15,21 @@ module Harvest
           @person_id
         end
         
+        def project_id=(id)
+          @project_id = id
+        end
+        
+        def project_id
+          @project_id
+        end
       end
+      
+      alias_method :save_without_project_id, :save
                   
+      def save
+        self.attributes[:project_id] = self.class.project_id
+        save_without_project_id
+      end
     end
   end
 end

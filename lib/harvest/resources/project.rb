@@ -27,6 +27,12 @@ module Harvest
         entry_class.find :all, :params => format_params(options)
       end
       
+      def expenses()
+        expense_class = Harvest::Resources::Expense.clone
+        expense_class.project_id = self.id
+        expense_class
+      end
+      
       private
       
         def validate_entries_options(options)
